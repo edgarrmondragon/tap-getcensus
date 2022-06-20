@@ -208,3 +208,118 @@ class Syncs(CensusStream):
             ),
         ),
     ).to_dict()
+
+    def get_child_context(self, record: dict, context: dict | None) -> dict:
+        """Get child context.
+
+        Args:
+            record: The record.
+            context: The context.
+
+        Returns:
+            The child context.
+        """
+        return {"sync_id": record["id"]}
+
+
+class SyncRuns(CensusStream):
+    """Sync runs stream."""
+
+    name = "sync_runs"
+    path = "/api/v1/syncs/{sync_id}/sync_runs"
+    primary_keys = ["id"]
+    replication_key = "updated_at"
+    parent_stream_type = Syncs
+
+    schema = th.PropertiesList(
+        th.Property(
+            "id",
+            th.IntegerType,
+            description="The sync run's system ID",
+        ),
+        th.Property(
+            "sync_id",
+            th.IntegerType,
+            description="The sync run's sync ID",
+        ),
+        th.Property(
+            "source_record_count",
+            th.IntegerType,
+            description="The sync run's source record count",
+        ),
+        th.Property(
+            "records_processed",
+            th.IntegerType,
+            description="The count of records processed",
+        ),
+        th.Property(
+            "records_updated",
+            th.IntegerType,
+            description="The count of records updated",
+        ),
+        th.Property(
+            "records_failed",
+            th.IntegerType,
+            description="The count of records failed",
+        ),
+        th.Property(
+            "records_invalid",
+            th.IntegerType,
+            description="The count of records invalid",
+        ),
+        th.Property(
+            "created_at",
+            th.DateTimeType,
+            description="The sync run's creation date",
+        ),
+        th.Property(
+            "updated_at",
+            th.DateTimeType,
+            description="The sync run's last updated date",
+        ),
+        th.Property(
+            "completed_at",
+            th.DateTimeType,
+            description="The sync run's completion date",
+        ),
+        th.Property(
+            "scheduled_execution_time",
+            th.DateTimeType,
+            description="The sync run's scheduled execution time",
+        ),
+        th.Property(
+            "error_code",
+            th.IntegerType,
+            description="The sync run's error code",
+        ),
+        th.Property(
+            "error_message",
+            th.StringType,
+            description="The sync run's error message",
+        ),
+        th.Property(
+            "error_detail",
+            th.StringType,
+            description="The sync run's error detail",
+        ),
+        th.Property(
+            "status",
+            th.StringType,
+            description="The sync run's status",
+        ),
+        th.Property(
+            "canceled",
+            th.BooleanType,
+            description="Whether the sync run is canceled",
+        ),
+        th.Property(
+            "full_sync",
+            th.BooleanType,
+            description="Whether the sync run is a full sync",
+        ),
+        th.Property(
+            "sync_trigger_reason",
+            th.ObjectType(additional_properties=th.StringType),
+            description="The sync run's sync trigger reason",
+        ),
+    ).to_dict()

@@ -6,10 +6,11 @@ from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
 from singer_sdk.streams import RESTStream
 
-from tap_getcensus.streams import Syncs
+from tap_getcensus.streams import SyncRuns, Syncs
 
 STREAM_TYPES: list[type[RESTStream]] = [
     Syncs,
+    SyncRuns,
 ]
 
 
