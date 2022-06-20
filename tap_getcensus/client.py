@@ -4,8 +4,10 @@ from __future__ import annotations
 
 from typing import Any
 
+import requests
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BasicAuthenticator
+from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 
 class CensusStream(RESTStream):
@@ -43,7 +45,7 @@ class CensusStream(RESTStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: Any | None,
+        next_page_token: int | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
 
@@ -59,3 +61,27 @@ class CensusStream(RESTStream):
             "page": next_page_token,
             "per_page": 100,
         }
+
+    def get_next_page_token(
+        self,
+        response: requests.Response,
+        previous_token: int | None,
+    ) -> int | None:
+        """Get the next page token.
+
+        Args:
+            response: The response from the API.
+            previous_token: The previous page token.
+
+        Returns:
+            The next page token.
+        """
+        if previous_token is None:
+            previous_token = 0
+
+        try:
+            next(extract_jsonpath(self.records_jsonpath, response.json()))
+        except StopIteration:
+            return None
+
+        return previous_token + 1
