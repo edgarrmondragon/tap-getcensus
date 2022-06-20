@@ -1,0 +1,23 @@
+# Changes here will be overwritten by Copier
+_commit: 0.0.6
+_src_path: gh:edgarrmondragon/singer-tap-copier-template
+author_email: edgarrm358@gmail.com
+author_fullname: Edgar Ramírez-Mondragón
+author_username: edgarrmondragon
+python_main_version: '3.10'
+repository_name: tap-getcensus
+repository_namespace: edgarrmondragon
+repository_provider: github.com
+tap_auth_method: Basic Auth
+tap_id: tap-getcensus
+tap_package_command_line_name: tap-getcensus
+tap_package_distribution_name: tap-getcensus
+tap_package_import_name: tap_getcensus
+tap_source_description: Census is a data integration platform that enables you to
+    sync your customer and product data from cloud data warehouses like Redshift,
+    Snowflake, and Databricks to the apps your sales and marketing teams use.
+tap_source_id: Census
+tap_source_name: Census
+tap_stream_type: REST
+vscode_files: true
+

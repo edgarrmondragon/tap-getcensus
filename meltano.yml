@@ -1,0 +1,25 @@
+version: 1
+send_anonymous_usage_stats: false
+project_id: tap-getcensus
+plugins:
+  extractors:
+  - name: tap-getcensus
+    label: Census
+    namespace: census
+    description: Census is a data integration platform that enables you to sync your customer and product data from cloud data warehouses like Redshift, Snowflake, and Databricks to the apps your sales and marketing teams use.
+    repository: https://github.com/edgarrmondragon/tap-getcensus
+    docs: https://github.com/edgarrmondragon/tap-getcensus#readme
+    pip_url: -e .
+    capabilities:
+    - state
+    - catalog
+    - discover
+    settings:
+    - name: api_token
+      kind: password
+      label: API Token
+      description: Census API Token
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
