@@ -7,7 +7,6 @@ from typing import Any
 import requests
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BasicAuthenticator
-from singer_sdk.helpers.jsonpath import extract_jsonpath
 
 
 class CensusStream(RESTStream):
@@ -79,9 +78,8 @@ class CensusStream(RESTStream):
         if previous_token is None:
             previous_token = 0
 
-        try:
-            next(extract_jsonpath(self.records_jsonpath, response.json()))
-        except StopIteration:
+        body = response.json()
+        if not body.get("next"):
             return None
 
         return previous_token + 1
