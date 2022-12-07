@@ -74,7 +74,7 @@ class CensusStream(RESTStream):
         """
         params = {
             "order": "asc",
-            "per_page": "1",
+            "per_page": "250",
         }
 
         if next_page_token:

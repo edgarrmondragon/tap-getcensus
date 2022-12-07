@@ -40,8 +40,8 @@ A full list of supported settings and capabilities is available by running: `tap
 
 | Stream                | Replication Method | Replication Key | Primary Key | Documentation |
 |:----------------------|:------------------:|:---------------:|:-----------:|:-------------:|
-| `syncs`               | Incremental        | updated_at      | id          | https://docs.getcensus.com/basics/api/syncs#get-syncs |
-| `sync_runs`           | Incremental        | updated_at      | id          | https://docs.getcensus.com/basics/api/sync-runs#get-syncs-id-sync_runs |
+| `syncs`               | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/syncs#get-syncs |
+| `sync_runs`           | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/sync-runs#get-syncs-id-sync_runs |
 | `destinations`        | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/destinations#get-destinations |
 | `destination_objects` | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/destination-objects#get-destinations-id-objects |
 | `sources`             | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/sources#get-sources |
