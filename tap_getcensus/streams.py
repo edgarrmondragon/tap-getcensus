@@ -22,7 +22,7 @@ class Syncs(CensusStream):
     name = "syncs"
     path = "/api/v1/syncs"
     primary_keys = ["id"]
-    replication_key = "updated_at"
+    replication_key = None
 
     schema = th.PropertiesList(
         th.Property(
@@ -243,7 +243,7 @@ class SyncRuns(CensusStream):
     name = "sync_runs"
     path = "/api/v1/syncs/{sync_id}/sync_runs"
     primary_keys = ["id"]
-    replication_key = "updated_at"
+    replication_key = None
     parent_stream_type = Syncs
 
     schema = th.PropertiesList(
