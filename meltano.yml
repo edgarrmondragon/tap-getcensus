@@ -1,15 +1,19 @@
 version: 1
 send_anonymous_usage_stats: false
-project_id: tap-getcensus
+project_id: eb081257-f9b5-229e-45a1-15c600271a0b
+default_environment: dev
+environments:
+- name: dev
 plugins:
   extractors:
   - name: tap-getcensus
-    label: Census
     namespace: census
-    description: Census is a data integration platform that enables you to sync your customer and product data from cloud data warehouses like Redshift, Snowflake, and Databricks to the apps your sales and marketing teams use.
-    repository: https://github.com/edgarrmondragon/tap-getcensus
+    label: Census
     docs: https://github.com/edgarrmondragon/tap-getcensus#readme
     pip_url: -e .
+    description: Census is a data integration platform that enables you to sync your
+      customer and product data from cloud data warehouses like Redshift, Snowflake,
+      and Databricks to the apps your sales and marketing teams use.
     capabilities:
     - state
     - catalog
@@ -19,7 +23,11 @@ plugins:
       kind: password
       label: API Token
       description: Census API Token
+    repository: https://github.com/edgarrmondragon/tap-getcensus
   loaders:
-  - name: target-jsonl
-    variant: andyh1203
-    pip_url: target-jsonl
+  - name: target-duckdb
+    variant: jwills
+    pip_url: target-duckdb~=0.4
+    config:
+      filepath: output/wh.db
+      default_target_schema: $MELTANO_ENVIRONMENT

@@ -1,8 +1,19 @@
-# `tap-getcensus`
+<div align="center">
 
-Singer tap for Census.
+# tap-getcensus
 
-Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Targets.
+<div>
+  <a href="https://results.pre-commit.ci/latest/github/edgarrmondragon/tap-getcensus/main">
+    <img alt="pre-commit.ci status" src="https://results.pre-commit.ci/badge/github/edgarrmondragon/tap-getcensus/main.svg"/>
+  </a>
+  <a href="https://github.com/edgarrmondragon/tap-getcensus/blob/main/LICENSE">
+    <img alt="License" src="https://img.shields.io/github/license/edgarrmondragon/tap-getcensus"/>
+  </a>
+</div>
+
+Singer Tap for the [Census Operational Analytics Platform](https://www.getcensus.com/). Built with the [Meltano Singer SDK](https://sdk.meltano.com).
+
+</div>
 
 ## Capabilities
 
@@ -24,6 +35,19 @@ Built with the [Meltano SDK](https://sdk.meltano.com) for Singer Taps and Target
 | flattening_max_depth| False    | None    | The max depth to flatten schemas. |
 
 A full list of supported settings and capabilities is available by running: `tap-getcensus --about`
+
+## Streams
+
+| Stream                | Replication Method | Replication Key | Primary Key | Documentation |
+|:----------------------|:------------------:|:---------------:|:-----------:|:-------------:|
+| `syncs`               | Incremental        | updated_at      | id          | https://docs.getcensus.com/basics/api/syncs#get-syncs |
+| `sync_runs`           | Incremental        | updated_at      | id          | https://docs.getcensus.com/basics/api/sync-runs#get-syncs-id-sync_runs |
+| `destinations`        | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/destinations#get-destinations |
+| `destination_objects` | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/destination-objects#get-destinations-id-objects |
+| `sources`             | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/sources#get-sources |
+| `source_objects`      | Full Table         | None            | id          | https://docs.getcensus.com/basics/api/source-objects#get-sources-id-objects |
+
+The full catalog is available by running: `tap-getcensus --discover`
 
 ### Source Authentication and Authorization
 
