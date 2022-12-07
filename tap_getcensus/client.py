@@ -3,10 +3,27 @@
 from __future__ import annotations
 
 from typing import Any
+from urllib.parse import ParseResult, parse_qsl
 
 import requests
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BasicAuthenticator
+from singer_sdk.pagination import BaseHATEOASPaginator
+
+
+class CensusPaginator(BaseHATEOASPaginator):
+    """Census API pagination class."""
+
+    def get_next_url(self, response: requests.Response) -> str | None:
+        """Get the next URL.
+
+        Args:
+            response: The response from the API.
+
+        Returns:
+            The next URL.
+        """
+        return response.json().get("next")
 
 
 class CensusStream(RESTStream):
@@ -44,7 +61,7 @@ class CensusStream(RESTStream):
     def get_url_params(
         self,
         context: dict | None,
-        next_page_token: int | None,
+        next_page_token: ParseResult | None,
     ) -> dict[str, Any]:
         """Get URL query parameters.
 
@@ -55,31 +72,20 @@ class CensusStream(RESTStream):
         Returns:
             Mapping of URL query parameters.
         """
-        return {
+        params = {
             "order": "asc",
-            "page": next_page_token,
-            "per_page": 100,
+            "per_page": "1",
         }
 
-    def get_next_page_token(
-        self,
-        response: requests.Response,
-        previous_token: int | None,
-    ) -> int | None:
-        """Get the next page token.
+        if next_page_token:
+            params.update(parse_qsl(next_page_token.query))
 
-        Args:
-            response: The response from the API.
-            previous_token: The previous page token.
+        return params
+
+    def get_new_paginator(self) -> CensusPaginator:
+        """Get a new paginator instance.
 
         Returns:
-            The next page token.
+            A new paginator instance.
         """
-        if previous_token is None:
-            previous_token = 0
-
-        body = response.json()
-        if not body.get("next"):
-            return None
-
-        return previous_token + 1
+        return CensusPaginator()

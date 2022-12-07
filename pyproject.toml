@@ -1,36 +1,28 @@
 [tool.poetry]
 name = "tap-getcensus"
 version = "0.0.1"
-description = "`tap-getcensus` is a Singer tap for Census, built with the Meltano SDK for Singer Taps."
+description = "Singer tap for the Census Operational Analytics Platform, built with the Meltano SDK for Singer Taps."
+license = "Apache-2.0"
 authors = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
+maintainers = ["Edgar Ramírez-Mondragón <edgarrm358@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/edgarrmondragon/tap-getcensus"
+repository = "https://github.com/edgarrmondragon/tap-getcensus"
+documentation = "https://github.com/edgarrmondragon/tap-getcensus/#readme"
 keywords = [
   "ELT",
   "singer.io",
   "Census",
 ]
-license = "Apache 2.0"
-readme = "README.md"
-homepage = "https://github.com/edgarrmondragon/tap-getcensus"
-repository = "https://github.com/edgarrmondragon/tap-getcensus"
-documentation = "https://github.com/edgarrmondragon/tap-getcensus#readme"
 
 [tool.poetry.dependencies]
-python = "<3.11,>=3.7.1"
+python = "<3.12,>=3.7.1"
 singer-sdk = "0.14.0"
 
 [tool.poetry.dev-dependencies]
-black = "^22.8.0"
-isort = "^5.10.1"
 mypy = ">=0.950"
 pytest = "^7.2.0"
-pyupgrade = "^3.3.1"
 types-requests = "^2.28.11"
-
-# Flake8
-darglint = "^1.8.1"
-flake8 = "^5.0.4"
-flake8-annotations = "^2.9.1"
-flake8-docstrings = "^1.6.0"
 
 [tool.isort]
 profile = "black"

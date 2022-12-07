@@ -15,6 +15,8 @@ from tap_getcensus.streams import (
     Syncs,
 )
 
+__all__ = ["TapCensus"]
+
 STREAM_TYPES: list[type[RESTStream]] = [
     Syncs,
     SyncRuns,

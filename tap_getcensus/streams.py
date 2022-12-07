@@ -6,6 +6,15 @@ from singer_sdk import typing as th
 
 from tap_getcensus.client import CensusStream
 
+__all__ = [
+    "Syncs",
+    "SyncRuns",
+    "Destinations",
+    "DestinationObjects",
+    "Sources",
+    "SourceObjects",
+]
+
 
 class Syncs(CensusStream):
     """Syncs stream."""
@@ -96,6 +105,12 @@ class Syncs(CensusStream):
             th.StringType,
             description="The sync's mirror strategy type",
         ),
+        # TODO: Add advanced_configuration when Census documentation is updated
+        # th.Property(
+        #     "advanced_configuration",
+        #     th.ObjectType(),
+        #     description="The sync's advanced configuration",
+        # ),
         th.Property(
             "source_attributes",
             th.ObjectType(
@@ -407,6 +422,11 @@ class DestinationObjects(CensusStream):
             ),
         ),
         th.Property(
+            "configurable_field_definitions",
+            th.ObjectType(),
+            description="The destination object's configurable field definitions",
+        ),
+        th.Property(
             "fields",
             th.ArrayType(
                 th.ObjectType(
@@ -557,7 +577,7 @@ class SourceObjects(CensusStream):
     name = "source_objects"
     path = "/api/v1/sources/{source_id}/objects"
     primary_keys = ["id"]
-    replication_key = "updated_at"
+    replication_key = None
     parent_stream_type = Sources
 
     schema = th.PropertiesList(
@@ -598,6 +618,11 @@ class SourceObjects(CensusStream):
             "name",
             th.StringType,
             description="The source object's name",
+        ),
+        th.Property(
+            "description",
+            th.StringType,
+            description="The source object's description",
         ),
         th.Property(
             "approved",
