@@ -4,27 +4,10 @@ from __future__ import annotations
 
 from singer_sdk import Stream, Tap
 from singer_sdk import typing as th
-from singer_sdk.streams import RESTStream
 
-from tap_getcensus.streams import (
-    DestinationObjects,
-    Destinations,
-    SourceObjects,
-    Sources,
-    SyncRuns,
-    Syncs,
-)
+from tap_getcensus import streams
 
 __all__ = ["TapCensus"]
-
-STREAM_TYPES: list[type[RESTStream]] = [
-    Syncs,
-    SyncRuns,
-    Destinations,
-    DestinationObjects,
-    Sources,
-    SourceObjects,
-]
 
 
 class TapCensus(Tap):
@@ -47,4 +30,11 @@ class TapCensus(Tap):
         Returns:
             A list of Census streams.
         """
-        return [stream_class(tap=self) for stream_class in STREAM_TYPES]
+        return [
+            streams.Syncs(tap=self),
+            streams.SyncRuns(tap=self),
+            streams.Destinations(tap=self),
+            streams.DestinationObjects(tap=self),
+            streams.Sources(tap=self),
+            streams.SourceObjects(tap=self),
+        ]

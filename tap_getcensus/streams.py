@@ -108,8 +108,8 @@ class Syncs(CensusStream):
         # TODO: Add advanced_configuration when Census documentation is updated
         # th.Property(
         #     "advanced_configuration",
-        #     th.ObjectType(),
-        #     description="The sync's advanced configuration",
+        #     th.ObjectType(),  # noqa: ERA001
+        #     description="The sync's advanced configuration",  # noqa: ERA001
         # ),
         th.Property(
             "source_attributes",
@@ -224,7 +224,11 @@ class Syncs(CensusStream):
         ),
     ).to_dict()
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Get child context.
 
         Args:
@@ -371,7 +375,11 @@ class Destinations(CensusStream):
         ),
     ).to_dict()
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Get child context.
 
         Args:
@@ -558,7 +566,11 @@ class Sources(CensusStream):
         ),
     ).to_dict()
 
-    def get_child_context(self, record: dict, context: dict | None) -> dict:
+    def get_child_context(
+        self,
+        record: dict,
+        context: dict | None,  # noqa: ARG002
+    ) -> dict:
         """Get child context.
 
         Args:

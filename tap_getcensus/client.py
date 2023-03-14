@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
-from typing import Any
+import typing as t
 from urllib.parse import ParseResult, parse_qsl
 
-import requests
 from singer_sdk import RESTStream
 from singer_sdk.authenticators import BasicAuthenticator
 from singer_sdk.pagination import BaseHATEOASPaginator
+
+if t.TYPE_CHECKING:
+    import requests
 
 
 class CensusPaginator(BaseHATEOASPaginator):
@@ -60,9 +62,9 @@ class CensusStream(RESTStream):
 
     def get_url_params(
         self,
-        context: dict | None,
+        context: dict | None,  # noqa: ARG002
         next_page_token: ParseResult | None,
-    ) -> dict[str, Any]:
+    ) -> dict[str, t.Any]:
         """Get URL query parameters.
 
         Args:
