@@ -105,7 +105,9 @@ class Syncs(CensusStream):
             th.StringType,
             description="The sync's mirror strategy type",
         ),
-        # TODO: Add advanced_configuration when Census documentation is updated
+        # TODO(edgarrmondragon): Add advanced_configuration when Census documentation
+        # is updated
+        # https://github.com/edgarrmondragon/tap-getcensus/issues/155
         # th.Property(
         #     "advanced_configuration",
         #     th.ObjectType(),  # noqa: ERA001
