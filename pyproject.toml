@@ -32,6 +32,25 @@ pytest = "^7.3.2"
 # CLI declaration
 "tap-getcensus" = "tap_getcensus.tap:TapCensus.cli"
 
+[tool.ruff]
+ignore = [
+    "ANN101",  # missing-type-self
+    "DJ",      # flake8-django
+    "FIX002",  # line-contains-todo
+]
+line-length = 88
+select = ["ALL"]
+unfixable = ["ERA001"]
+
+[tool.ruff.isort]
+required-imports = ["from __future__ import annotations"]
+
+[tool.ruff.per-file-ignores]
+"tests/*" = ["ANN"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
 [tool.pytest.ini_options]
 addopts = "-vvv"
 
@@ -57,22 +76,3 @@ format-jinja = """
 metadata = true
 style = "pep440"
 vcs = "git"
-
-[tool.ruff]
-ignore = [
-    "ANN101",  # missing-type-self
-    "DJ",      # flake8-django
-    "FIX002",  # line-contains-todo
-]
-line-length = 88
-select = ["ALL"]
-unfixable = ["ERA001"]
-
-[tool.ruff.isort]
-required-imports = ["from __future__ import annotations"]
-
-[tool.ruff.per-file-ignores]
-"tests/*" = ["ANN"]
-
-[tool.ruff.pydocstyle]
-convention = "google"
