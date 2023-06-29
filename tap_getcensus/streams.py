@@ -21,7 +21,7 @@ class Syncs(CensusStream):
 
     name = "syncs"
     path = "/api/v1/syncs"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
@@ -248,7 +248,7 @@ class SyncRuns(CensusStream):
 
     name = "sync_runs"
     path = "/api/v1/syncs/{sync_id}/sync_runs"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
     parent_stream_type = Syncs
 
@@ -351,7 +351,7 @@ class Destinations(CensusStream):
 
     name = "destinations"
     path = "/api/v1/destinations"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
@@ -399,7 +399,7 @@ class DestinationObjects(CensusStream):
 
     name = "destination_objects"
     path = "/api/v1/destinations/{destination_id}/objects"
-    primary_keys = ["full_name"]
+    primary_keys = ("full_name",)
     replication_key = None
     parent_stream_type = Destinations
 
@@ -522,7 +522,7 @@ class Sources(CensusStream):
 
     name = "sources"
     path = "/api/v1/sources"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
 
     schema = th.PropertiesList(
@@ -590,7 +590,7 @@ class SourceObjects(CensusStream):
 
     name = "source_objects"
     path = "/api/v1/sources/{source_id}/objects"
-    primary_keys = ["id"]
+    primary_keys = ("id",)
     replication_key = None
     parent_stream_type = Sources
 
